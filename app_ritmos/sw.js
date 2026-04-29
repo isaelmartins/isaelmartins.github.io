@@ -1,0 +1,29 @@
+const CACHE_NAME = 'ritmosbr-v1.0.5'; // REFRESH 1.0.5
+const assets = [
+  './',
+  './index.html',
+  './manifest.json',
+  './sw.js',
+  './audio_assets.js'
+];
+
+self.addEventListener('install', event => {
+  self.skipWaiting(); // Força a nova versão a assumir o controle na hora
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(assets))
+  );
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys => Promise.all(
+      keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+    ))
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => response || fetch(event.request))
+  );
+});
