@@ -3,7 +3,7 @@
   "short_name": "RitmosBR",
   "description": "Aprenda ritmos brasileiros no violão com sincronia perfeita.",
   "id": "/ritmosbr/",
-  "start_url": "./index.html?v=3",
+  "start_url": "./index.html?v=4",
   "scope": "/ritmosbr/",
   "display": "standalone",
   "background_color": "#050505",
